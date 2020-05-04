@@ -34,7 +34,7 @@ B站视频[链接](https://b23.tv/BV1qs411L7e6) https://b23.tv/BV1qs411L7e6
 #### 文件结构
 * WreckerCarPCB_Project _（清障车的电路工程文件 AD17绘制）_
 * WreckerCar_Code _（清障车的51控制代码 MDK5工程）_
-* StructuralDrawing _（清障车的solidwork结构工程）_
+* StructuralDraw _（清障车的solidwork2016结构工程）_
 * 实物图片
 * 多功能消防清障车说明书.doc _（中日韩2017比赛时提交的作品说明书）_
 	
