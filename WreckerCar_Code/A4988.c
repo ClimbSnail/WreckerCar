@@ -2,9 +2,9 @@
 
 sbit DIR = P3^7;
 sbit STEP = P3^6;
-sbit ENA = P3^5;////²½½øÇı¶¯Ê¹ÄÜ¿Ú
+sbit ENA = P3^5;////æ­¥è¿›é©±åŠ¨ä½¿èƒ½å£
 
-void SetPulsePositive (uint Number)//ÏòÉÏ
+void SetPulsePositive (uint Number)//å‘ä¸Š
 {
     DIR = 1;
 		ENA = 1;
@@ -20,7 +20,7 @@ void SetPulsePositive (uint Number)//ÏòÉÏ
 		ENA = 0;
 }
 
-void SetPulseReverse(uint Number)//ÏòÏÂ
+void SetPulseReverse(uint Number)//å‘ä¸‹
 {
     DIR = 0;
 		ENA = 1;

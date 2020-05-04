@@ -14,22 +14,22 @@
 #define uint  unsigned int
 
 char FruitFall = 0;
-char count = 0;//²ÉÕªË®¹ûµÄ¼ÆÊıÖµ
+char count = 0;//é‡‡æ‘˜æ°´æœçš„è®¡æ•°å€¼
 int temp;
-uchar message = 0x00; //ÏûÏ¢
-uchar receiveFlag = 0x00;//½ÓÊÕ±êÖ¾
+uchar message = 0x00; //æ¶ˆæ¯
+uchar receiveFlag = 0x00;//æ¥æ”¶æ ‡å¿—
 bit busy;
-uchar dat[4]= {0,0x80,0x80,0};	//Camera½ÓÊÕµÄ»º³åÇø
-uchar dat_pos = 0;	  //´®¿Ú2Êı¾İ»º³åÆ÷
-uchar uart2flag = 0;  //´®¿Ú2½ÓÊÕ±êÖ¾
-//uchar CameraStatus = 0;	  //ÉãÏñÍ·¿ªÆô±êÖ¾
-//uchar TCameraStatus = 0;  //ÉãÏñÍ·Ê¹ÄÜ×´Ì¬±êÖ¾¼ÇÂ¼
-uchar BluetoothLink = 0;	//À¶ÑÀÁ¬½Ó±êÖ¾ À¶ÑÀÁ¬½ÓÊ±»á·¢ËÍÒ»´®"ÂÒÂë" ÉèÖÃ±êÖ¾Î»ÓÃÀ´Ïû³ı
+uchar dat[4]= {0,0x80,0x80,0};	//Cameraæ¥æ”¶çš„ç¼“å†²åŒº
+uchar dat_pos = 0;	  //ä¸²å£2æ•°æ®ç¼“å†²å™¨
+uchar uart2flag = 0;  //ä¸²å£2æ¥æ”¶æ ‡å¿—
+//uchar CameraStatus = 0;	  //æ‘„åƒå¤´å¼€å¯æ ‡å¿—
+//uchar TCameraStatus = 0;  //æ‘„åƒå¤´ä½¿èƒ½çŠ¶æ€æ ‡å¿—è®°å½•
+uchar BluetoothLink = 0;	//è“ç‰™è¿æ¥æ ‡å¿— è“ç‰™è¿æ¥æ—¶ä¼šå‘é€ä¸€ä¸²"ä¹±ç " è®¾ç½®æ ‡å¿—ä½ç”¨æ¥æ¶ˆé™¤
 uchar brightness = 0;
 int pwm2;
 int pwm3;
 
-float x=100,z=150;//Êµ¼Ê×ø±êµã
+float x=100,z=150;//å®é™…åæ ‡ç‚¹
 
 void Uart2() interrupt 8 using 1
 {
@@ -58,33 +58,33 @@ void uart(void) interrupt 4
 {
     if( RI )
     {
-        RI = 0;	 //½ÓÊÕÎ»ÇåÁã
-        receiveFlag = 1;//½ÓÊÕ±êÖ¾Î»ÖÃ1
-        message = SBUF;	//½ÓÊÕĞÅÏ¢
-				if( message == 0xff )		//À¶ÑÀÁ¬½ÓÊ±»á·¢ËÍÒ»´®"ÂÒÂë" ÉèÖÃ±êÖ¾Î»ÓÃÀ´Ïû³ı
+        RI = 0;	 //æ¥æ”¶ä½æ¸…é›¶
+        receiveFlag = 1;//æ¥æ”¶æ ‡å¿—ä½ç½®1
+        message = SBUF;	//æ¥æ”¶ä¿¡æ¯
+				if( message == 0xff )		//è“ç‰™è¿æ¥æ—¶ä¼šå‘é€ä¸€ä¸²"ä¹±ç " è®¾ç½®æ ‡å¿—ä½ç”¨æ¥æ¶ˆé™¤
 				{
 					BluetoothLink = !BluetoothLink;
-					Stop();//³µÂÖÍ£Ö¹
-					StopWater();//Í£Ö¹³éË®
-					set_circle_pwm7(0);//¹Ø±Õpwm7Ñ­»·×ª
-					StopClean();//Í£Ö¹Çå½à
-					SetLed(0);//¹ØµÆ
+					Stop();//è½¦è½®åœæ­¢
+					StopWater();//åœæ­¢æŠ½æ°´
+					set_circle_pwm7(0);//å…³é—­pwm7å¾ªç¯è½¬
+					StopClean();//åœæ­¢æ¸…æ´
+					SetLed(0);//å…³ç¯
 				}
 
-//ÒÔÏÂ³ÌĞò²âÊÔÓÃ
+//ä»¥ä¸‹ç¨‹åºæµ‹è¯•ç”¨
 //		SBUF = message;
-//		while(!TI);		  //µÈ´ı·¢ËÍÊı¾İÍê³É
-//		TI=0;			  //Çå³ı·¢ËÍÍê³É±êÖ¾Î»
+//		while(!TI);		  //ç­‰å¾…å‘é€æ•°æ®å®Œæˆ
+//		TI=0;			  //æ¸…é™¤å‘é€å®Œæˆæ ‡å¿—ä½
     }
 }
 
-void Camera_RECEIVE()//ÉãÏñÍ·ĞÅÏ¢´¦Àí³ÌĞò
+void Camera_RECEIVE()//æ‘„åƒå¤´ä¿¡æ¯å¤„ç†ç¨‹åº
 {
     
 }
-void RECEIVE_JUGE( )//À¶ÑÀĞÅÏ¢´¦Àí³ÌĞò
+void RECEIVE_JUGE( )//è“ç‰™ä¿¡æ¯å¤„ç†ç¨‹åº
 {
-	if( BluetoothLink )//À¶ÑÀÁ¬½ÓÊ±»á·¢ËÍÒ»´®"ÂÒÂë" ÉèÖÃ±êÖ¾Î»ÓÃÀ´Ïû³ı
+	if( BluetoothLink )//è“ç‰™è¿æ¥æ—¶ä¼šå‘é€ä¸€ä¸²"ä¹±ç " è®¾ç½®æ ‡å¿—ä½ç”¨æ¥æ¶ˆé™¤
 	{
     if( receiveFlag == 1 )
     {
@@ -94,7 +94,7 @@ void RECEIVE_JUGE( )//À¶ÑÀĞÅÏ¢´¦Àí³ÌĞò
             receiveFlag = 0;
 						Stop();
             break;
-        case 0x01://ÏòÇ°
+        case 0x01://å‘å‰
             if( x*x+z*z<=58000 && x<240 && z>0)
             {
                 if( x*x+z*z>=55000 && z>=0.5f)
@@ -115,7 +115,7 @@ void RECEIVE_JUGE( )//À¶ÑÀĞÅÏ¢´¦Àí³ÌĞò
             }
 //			Delay200us();
             break;
-        case 0x02://Ïòºó
+        case 0x02://å‘å
             if( x*x+z*z>=32000 && x>5 && z>0)
             {
                 if( x*x+z*z<=33000 && z<240 )
@@ -136,7 +136,7 @@ void RECEIVE_JUGE( )//À¶ÑÀĞÅÏ¢´¦Àí³ÌĞò
 						}
 //			Delay200us();
             break;
-        case 0x03://ÏòÉÏ
+        case 0x03://å‘ä¸Š
             if( z>0 )
             {
                 if( x*x+z*z<58000 )
@@ -162,7 +162,7 @@ void RECEIVE_JUGE( )//À¶ÑÀĞÅÏ¢´¦Àí³ÌĞò
 							}
 //			Delay200us();
             break;
-        case 0x04://ÏòÏÂ
+        case 0x04://å‘ä¸‹
             if( z>0 )
             {
                 if( x*x+z*z>=32000 )
@@ -186,7 +186,7 @@ void RECEIVE_JUGE( )//À¶ÑÀĞÅÏ¢´¦Àí³ÌĞò
             break;
         case 0x05:
             temp = 	getSteering(5);
-            if(temp>=2497)pwm_change(5,2497); //ÄæÊ±Õë
+            if(temp>=2497)pwm_change(5,2497); //é€†æ—¶é’ˆ
 						else
 							pwm_change(5,temp+1);
             updata_TimingLeft();
@@ -194,7 +194,7 @@ void RECEIVE_JUGE( )//À¶ÑÀĞÅÏ¢´¦Àí³ÌĞò
             break;
         case 0x06:
             temp = 	getSteering(5);
-            if(temp<=503)pwm_change(5,503); //Ë³Ê±Õë
+            if(temp<=503)pwm_change(5,503); //é¡ºæ—¶é’ˆ
 						else
 							pwm_change(5,temp-1);
             updata_TimingLeft();
@@ -202,7 +202,7 @@ void RECEIVE_JUGE( )//À¶ÑÀĞÅÏ¢´¦Àí³ÌĞò
             break;
         case 0x07:
             temp = 	getSteering(0);
-            if(temp>=1600)pwm_change(0,1600); //¼Ğ½ô
+            if(temp>=1600)pwm_change(0,1600); //å¤¹ç´§
 						else
 							pwm_change(0,temp+1);
             updata_TimingLeft();
@@ -211,85 +211,85 @@ void RECEIVE_JUGE( )//À¶ÑÀĞÅÏ¢´¦Àí³ÌĞò
         case 0x08:
             temp = 	getSteering(0);
             if(temp<=900)
-							pwm_change(0,900); //ËÉ¿ª
+							pwm_change(0,900); //æ¾å¼€
 						else
 						pwm_change(0,temp-1);
             updata_TimingLeft();
             Delay1ms();
             break;
-        case 0x09://Ç°½ø
+        case 0x09://å‰è¿›
 						Forward();
             Delay100ms();
             break;
-        case 0x0a://ºóÍË
+        case 0x0a://åé€€
 						Back();
             Delay100ms();
             break;
-        case 0x0b://Ë³¹Õ
+        case 0x0b://é¡ºæ‹
 						Turnrigth();
             Delay100ms();
             break;
-        case 0x0c://Äæ¹Õ
+        case 0x0c://é€†æ‹
 						Turnleft();
             Delay100ms();
             break;
-        case 0x0d://´ò¿ªË®±Ã
+        case 0x0d://æ‰“å¼€æ°´æ³µ
             StartWater();
             break;
-        case 0x0e://¹Ø±ÕË®±Ã
+        case 0x0e://å…³é—­æ°´æ³µ
             StopWater();
             break;
-        case 0x0f://¿ªÊ¼Çå½à
+        case 0x0f://å¼€å§‹æ¸…æ´
 						StartClean();
             break;
-        case 0x10://Í£Ö¹Çå½à
+        case 0x10://åœæ­¢æ¸…æ´
 						StopClean();
             break;
         case 0x11:
-            SetPulsePositive(1000);//²ù¶·ÏòÉÏ
+            SetPulsePositive(1000);//é“²æ–—å‘ä¸Š
 						receiveFlag = 0;
 						break;
         case 0x12:
-            SetPulseReverse(1000);//²ù¶·ÏòÏÂ
+            SetPulseReverse(1000);//é“²æ–—å‘ä¸‹
 						receiveFlag = 0;
 						break;
 				case 0x13:
-						set_circle_pwm7(1);//ÆôÓÃpwm7Ñ­»·×ª
+						set_circle_pwm7(1);//å¯ç”¨pwm7å¾ªç¯è½¬
 						receiveFlag = 0;
 						break;
 				case 0x14:
-						set_circle_pwm7(0);//¹Ø±Õpwm7Ñ­»·×ª
+						set_circle_pwm7(0);//å…³é—­pwm7å¾ªç¯è½¬
 						receiveFlag = 0;
 						break;
-				case 0x15://¿ªÀ¬»øÏä
-						open_Dustbin(1);//¿ª¹ØÀ¬»øÏä 1ÎªÆôÓÃ 0Îª¹Ø±Õ
+				case 0x15://å¼€åƒåœ¾ç®±
+						open_Dustbin(1);//å¼€å…³åƒåœ¾ç®± 1ä¸ºå¯ç”¨ 0ä¸ºå…³é—­
 						receiveFlag = 0;
 						break;
-				case 0x16://¹ØÀ¬»øÏä
-						open_Dustbin(0);//¿ª¹ØÀ¬»øÏä 1ÎªÆôÓÃ 0Îª¹Ø±Õ
+				case 0x16://å…³åƒåœ¾ç®±
+						open_Dustbin(0);//å¼€å…³åƒåœ¾ç®± 1ä¸ºå¯ç”¨ 0ä¸ºå…³é—­
 						receiveFlag = 0;
 						break;
-				case 0x17://LedÔöÁ¿Ò»¸öµ¥Î»
+				case 0x17://Ledå¢é‡ä¸€ä¸ªå•ä½
 						if( brightness == 1 )
 							brightness = 1;
 						else
 							brightness = (brightness+10-1)%10;
-						SetLed(brightness);//numÎª0Ê±¹Ø±Õ ¿ªÆôµÄÖµÎª1-9,1×î´ó 9×îĞ¡
+						SetLed(brightness);//numä¸º0æ—¶å…³é—­ å¼€å¯çš„å€¼ä¸º1-9,1æœ€å¤§ 9æœ€å°
 						receiveFlag = 0;
 						break;
-				case 0x18://Led¼õĞ¡Ò»¸öµ¥Î»
+				case 0x18://Ledå‡å°ä¸€ä¸ªå•ä½
 						if( brightness == 0 )
 							brightness = 0;
 						else
 							brightness = (brightness+1)%10;
-						SetLed(brightness);//numÎª0Ê±¹Ø±Õ ¿ªÆôµÄÖµÎª1-9,1×î´ó 9×îĞ¡
+						SetLed(brightness);//numä¸º0æ—¶å…³é—­ å¼€å¯çš„å€¼ä¸º1-9,1æœ€å¤§ 9æœ€å°
 						receiveFlag = 0;
 						break;
-				case 0x19://³µËÙµ÷×î¸ß
-					SetSpeed(1);//ÉèÖÃËÙ¶È ÖµÎª1-9,1×î´ó 9×îĞ¡ 0Ê±¹Ø±Õ
+				case 0x19://è½¦é€Ÿè°ƒæœ€é«˜
+					SetSpeed(1);//è®¾ç½®é€Ÿåº¦ å€¼ä¸º1-9,1æœ€å¤§ 9æœ€å° 0æ—¶å…³é—­
 					break;
-				case 0x1A://³µËÙµ÷Ò»°ë
-					SetSpeed(8);//ÉèÖÃËÙ¶È ÖµÎª1-9,1×î´ó 9×îĞ¡ 0Ê±¹Ø±Õ
+				case 0x1A://è½¦é€Ÿè°ƒä¸€åŠ
+					SetSpeed(8);//è®¾ç½®é€Ÿåº¦ å€¼ä¸º1-9,1æœ€å¤§ 9æœ€å° 0æ—¶å…³é—­
 					break;
         default:
             break;
@@ -300,49 +300,49 @@ void RECEIVE_JUGE( )//À¶ÑÀĞÅÏ¢´¦Àí³ÌĞò
 }
 
 
-void main()	//Ö÷³ÌĞò
+void main()	//ä¸»ç¨‹åº
 {
 		P0 = 0x00;
 		P1 = 0x00;
 		P2 = 0xff;
-		P3 = 0xdf;//²½½øÇı¶¯Ê¹ÄÜ¹Ø
-    P4SW |= 0x70;	 //ÆôÓÃP4.4 P4.5 P4.6
+		P3 = 0xdf;//æ­¥è¿›é©±åŠ¨ä½¿èƒ½å…³
+    P4SW |= 0x70;	 //å¯ç”¨P4.4 P4.5 P4.6
 	
-		SetLed(0);//numÎª0Ê±¹Ø±Õ ¿ªÆôµÄÖµÎª1-9,1×î´ó
+		SetLed(0);//numä¸º0æ—¶å…³é—­ å¼€å¯çš„å€¼ä¸º1-9,1æœ€å¤§
 	
 //    OLED_Init();
 //    OLED_Clear();
-//    OLED_ShowCHinese(0,0,9);//ÁÉ
-//    OLED_ShowCHinese(20,0,10);//Äş
-//    OLED_ShowCHinese(40,0,5);//¿Æ
-//    OLED_ShowCHinese(60,0,6);//¼¼
-//    OLED_ShowCHinese(80,0,11);//´ó
-//    OLED_ShowCHinese(100,0,12);//Ñ§
-//    OLED_ShowCHinese(0,4,17);//Ë®
-//    OLED_ShowCHinese(14,4,18);//¹û
-//    OLED_ShowCHinese(28,4,19);//²É
-//    OLED_ShowCHinese(42,4,20);//Õª
-//    OLED_ShowCHinese(56,4,21);//ÀÛ
-//    OLED_ShowCHinese(70,4,22);//¼Æ
+//    OLED_ShowCHinese(0,0,9);//è¾½
+//    OLED_ShowCHinese(20,0,10);//å®
+//    OLED_ShowCHinese(40,0,5);//ç§‘
+//    OLED_ShowCHinese(60,0,6);//æŠ€
+//    OLED_ShowCHinese(80,0,11);//å¤§
+//    OLED_ShowCHinese(100,0,12);//å­¦
+//    OLED_ShowCHinese(0,4,17);//æ°´
+//    OLED_ShowCHinese(14,4,18);//æœ
+//    OLED_ShowCHinese(28,4,19);//é‡‡
+//    OLED_ShowCHinese(42,4,20);//æ‘˜
+//    OLED_ShowCHinese(56,4,21);//ç´¯
+//    OLED_ShowCHinese(70,4,22);//è®¡
 //    OLED_ShowChar(84,4,':');
-//    OLED_ShowNum(92,4,0,3,16);//ÏÔÊ¾ASCII×Ö·ûµÄÂëÖµ
+//    OLED_ShowNum(92,4,0,3,16);//æ˜¾ç¤ºASCIIå­—ç¬¦çš„ç å€¼
 		
 	  pwm_change(0,900);
 		pwm_change(1,1500);
 		pwm_change(2,1500-90);
     pwm_change(3,1500-70);
     pwm_change(4,1500);
-    updata_TimingLeft();//¸üĞÂÊ£ÓàµÍµçÆ½Ê±¼ä
+    updata_TimingLeft();//æ›´æ–°å‰©ä½™ä½ç”µå¹³æ—¶é—´
 		
 //    usart_init();
-    uart_init12M(9600); //´®¿Ú³õÊ¼»¯
-    timer0_init();//¶¨Ê±Æ÷0³õÊ¼»¯
-		timer1_init();//¶¨Ê±Æ÷1³õÊ¼»¯
-    steering_init();//¶æ»ú²ÎÊıµÄ³õÊ¼»¯
-//    ext0_init();	//Íâ²¿ÖĞ¶Ï0³õÊ¼»¯
-//    ext1_init();	//Íâ²¿ÖĞ¶Ï1³õÊ¼»¯
+    uart_init12M(9600); //ä¸²å£åˆå§‹åŒ–
+    timer0_init();//å®šæ—¶å™¨0åˆå§‹åŒ–
+		timer1_init();//å®šæ—¶å™¨1åˆå§‹åŒ–
+    steering_init();//èˆµæœºå‚æ•°çš„åˆå§‹åŒ–
+//    ext0_init();	//å¤–éƒ¨ä¸­æ–­0åˆå§‹åŒ–
+//    ext1_init();	//å¤–éƒ¨ä¸­æ–­1åˆå§‹åŒ–
     while(1)
     {
-        RECEIVE_JUGE();  //´®¿Ú½ÓÊÕÅĞ¶Ï
+        RECEIVE_JUGE();  //ä¸²å£æ¥æ”¶åˆ¤æ–­
     }
 }

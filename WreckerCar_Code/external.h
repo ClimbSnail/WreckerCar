@@ -5,10 +5,10 @@
 #include "delay.h"
 
 
-extern void ext0_init();	   //外部中断0的初始化
-extern char get_ext0();	    //查询是否产生中断
+extern void ext0_init();	   //澶栭儴涓柇0鐨勫垵濮嬪寲
+extern char get_ext0();	    //鏌ヨ鏄惁浜х敓涓柇
 
-extern void ext1_init();	   //外部中断1的初始化
-extern char get_ext1();	    //查询是否产生中断
+extern void ext1_init();	   //澶栭儴涓柇1鐨勫垵濮嬪寲
+extern char get_ext1();	    //鏌ヨ鏄惁浜х敓涓柇
 
 #endif

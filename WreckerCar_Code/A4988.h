@@ -7,7 +7,7 @@
 #define uchar unsigned char
 #define uint  unsigned int
 
-extern void SetPulsePositive (uint Number); //设置脉冲正向发生脉冲个数
-extern void SetPulseReverse(uint Number);	  //设置脉冲反向发生脉冲个数
+extern void SetPulsePositive (uint Number); //璁剧疆鑴夊啿姝ｅ悜鍙戠敓鑴夊啿涓暟
+extern void SetPulseReverse(uint Number);	  //璁剧疆鑴夊啿鍙嶅悜鍙戠敓鑴夊啿涓暟
 
 #endif

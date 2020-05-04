@@ -7,8 +7,8 @@
 #define uint  unsigned int
 
 
-extern void steering_pwm_change();//¶æ»úPWMµÄ¸üĞÂ
-extern void steering_init();//¶æ»ú³õÊ¼»¯
-extern void Change_angle(float x,float z);	 //¼ÆËã²¢¸üĞÂ¶æ»ú½Ç¶È
+extern void steering_pwm_change();//èˆµæœºPWMçš„æ›´æ–°
+extern void steering_init();//èˆµæœºåˆå§‹åŒ–
+extern void Change_angle(float x,float z);	 //è®¡ç®—å¹¶æ›´æ–°èˆµæœºè§’åº¦
 
 #endif

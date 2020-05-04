@@ -1,23 +1,23 @@
 #include "timer.h"
 #include "TB6612.h"
 
-//¶¨Ê±ÖµµÄ¸ß8Î»ÓëµÍ8Î»
+//å®šæ—¶å€¼çš„é«˜8ä½ä¸ä½8ä½
 static uchar timingValueH[9]= {0xFA,0xFA,0xFE,0xFE,0xFC,0xFA,0xFD,0xFB, 0x00};
 static uchar timingValueL[9]= {0x24,0x24,0x0C,0x0C,0x18,0x24,0xDA,0xB3, 0x00};
 //   0xF6	0x3C
 
-//¶¨Ê±Æ÷ÖĞÊ¹ÓÃµÄ¶¨Ê±¼ÆÊıÖµÏÂ±ê
+//å®šæ—¶å™¨ä¸­ä½¿ç”¨çš„å®šæ—¶è®¡æ•°å€¼ä¸‹æ ‡
 static uchar pwm_flag0 = 0;
 static uint pwm_flag1 = 0;
 static uchar pwm7H = 0xFB;
 static uchar pwm7L = 0xB3;
 uchar pos;
 
-//µÍµçÆ½µÄÊ£ÓàÊ±¼ä
+//ä½ç”µå¹³çš„å‰©ä½™æ—¶é—´
 static uint timingLeftValue0 = 0;
 
 static uchar pwm;
-//P0¶ÔÓ¦PWM0~7   Ä¿Ç°ÉêÃ÷¶¼Ã»ÓÃÉÏ
+//P0å¯¹åº”PWM0~7   ç›®å‰ç”³æ˜éƒ½æ²¡ç”¨ä¸Š
 sbit pwm0 = P0^0;
 sbit pwm1 = P0^1;
 sbit pwm2 = P0^2;
@@ -28,52 +28,52 @@ sbit pwm6 = P0^6;
 sbit pwm7 = P0^7;
 
 
-//¶¨Ê±Æ÷0³õÊ¼»¯
+//å®šæ—¶å™¨0åˆå§‹åŒ–
 void timer0_init()
 {
-    EA = 1;	  //¿ªÆô×ÜÖĞ¶Ï
-    ET0 = 1;	   // ¶¨Ê±Æ÷0¿ÉÓÃ
-    TMOD |= 0x01;//ÉèÖÃ¶¨Ê±Æ÷0Îª¹¤×÷·½Ê½1(16Î»¼ÆÊıÆ÷)
-    //ÏÈ³õÊ¼¸³Öµpwm0
+    EA = 1;	  //å¼€å¯æ€»ä¸­æ–­
+    ET0 = 1;	   // å®šæ—¶å™¨0å¯ç”¨
+    TMOD |= 0x01;//è®¾ç½®å®šæ—¶å™¨0ä¸ºå·¥ä½œæ–¹å¼1(16ä½è®¡æ•°å™¨)
+    //å…ˆåˆå§‹èµ‹å€¼pwm0
     TH0 = timingValueH[0];
     TL0 = timingValueL[0];
-    TR0 = 1;//¶¨Ê±Æ÷0¿ªÊ¼¼ÆÊı
+    TR0 = 1;//å®šæ—¶å™¨0å¼€å§‹è®¡æ•°
 }
-//¶¨Ê±Æ÷1³õÊ¼»¯
+//å®šæ—¶å™¨1åˆå§‹åŒ–
 void timer1_init()
 {
-    EA = 1;	  //¿ªÆô×ÜÖĞ¶Ï
-    ET1 = 1;	   // ¶¨Ê±Æ÷1¿ÉÓÃ
-    TMOD |= 0x10;//ÉèÖÃ¶¨Ê±Æ÷0Îª¹¤×÷·½Ê½1(16Î»¼ÆÊıÆ÷)
-    //ÏÈ³õÊ¼¸³Öµpwm9
+    EA = 1;	  //å¼€å¯æ€»ä¸­æ–­
+    ET1 = 1;	   // å®šæ—¶å™¨1å¯ç”¨
+    TMOD |= 0x10;//è®¾ç½®å®šæ—¶å™¨0ä¸ºå·¥ä½œæ–¹å¼1(16ä½è®¡æ•°å™¨)
+    //å…ˆåˆå§‹èµ‹å€¼pwm9
     TH1 = timingValueH[8];
     TL1 = timingValueL[8];
-    TR1 = 1;//¶¨Ê±Æ÷1¿ªÊ¼¼ÆÊı
+    TR1 = 1;//å®šæ—¶å™¨1å¼€å§‹è®¡æ•°
 }
 
-//¶¨Ê±Æ÷ÖĞ¶Ï0
+//å®šæ—¶å™¨ä¸­æ–­0
 void timer0 (void) interrupt 1
 {
 
-    if( pwm_flag0 == 8 )  //µ±ÒªÖ´ĞĞPWM8Ê±
+    if( pwm_flag0 == 8 )  //å½“è¦æ‰§è¡ŒPWM8æ—¶
     {
         P0 = 0x00;
         TH0 = timingValueH[8];
         TL0 = timingValueL[8];
     }
-    else				  //¶¨Ê±PWM0~7
+    else				  //å®šæ—¶PWM0~7
     {
         if( pwm_flag0 == 0 )
             P0 = 0x01;
         else
             P0 <<= 1;
-        TH0 = timingValueH[pwm_flag0]; //¶¨Ê±Ê±¼ä¸³Öµ
+        TH0 = timingValueH[pwm_flag0]; //å®šæ—¶æ—¶é—´èµ‹å€¼
         TL0 = timingValueL[pwm_flag0];
     }
-    pwm_flag0 = (pwm_flag0+1)%9;	//ÏÂ±êÍÆ½ø
+    pwm_flag0 = (pwm_flag0+1)%9;	//ä¸‹æ ‡æ¨è¿›
 }
 
-//¶¨Ê±Æ÷ÖĞ¶Ï1
+//å®šæ—¶å™¨ä¸­æ–­1
 void timer1 (void) interrupt 3
 {
 		TH1 = 0xFC;
@@ -131,13 +131,13 @@ void timer1 (void) interrupt 3
 }
 
 
-void pwm_change(uchar pwmNumber,uint pwmDuty)	//pwmNumber·¶Î§0~7 pwmDuty(1~2500us)
+void pwm_change(uchar pwmNumber,uint pwmDuty)	//pwmNumberèŒƒå›´0~7 pwmDuty(1~2500us)
 {
     pwmDuty = 65536-pwmDuty;
-//ÏÈ¸Ä±ä¶¨Ê±Ê±¼äµÄÖµ
+//å…ˆæ”¹å˜å®šæ—¶æ—¶é—´çš„å€¼
 //	timingValueH[pwmNumber]	=  pwmDuty/256;
 //	timingValueL[pwmNumber]	=  pwmDuty%256;
-//Ê¹ÓÃÎ»²Ù×÷,ÔËËãËÙ¶È¸ü¿ì
+//ä½¿ç”¨ä½æ“ä½œ,è¿ç®—é€Ÿåº¦æ›´å¿«
     timingValueH[pwmNumber]	=  pwmDuty>>8;
     timingValueL[pwmNumber]	=  (pwmDuty<<8)>>8;
 
@@ -147,15 +147,15 @@ void pwm_change(uchar pwmNumber,uint pwmDuty)	//pwmNumber·¶Î§0~7 pwmDuty(1~2500u
 //		SREET1 = 65536-(timingValueH[0]*256+timingValueL[0]);
 }
 
-//¸üĞÂÊ£ÓàµÍµçÆ½Ê±¼ä
+//æ›´æ–°å‰©ä½™ä½ç”µå¹³æ—¶é—´
 void updata_TimingLeft()
 {
     uchar count;
-    //¼ÆËãÊ£ÓàµÍµçÆ½µÄÊ£ÓàÊ±¼ä
+    //è®¡ç®—å‰©ä½™ä½ç”µå¹³çš„å‰©ä½™æ—¶é—´
     timingLeftValue0 = 65536-20000;
     for( count = 0 ; count<8 ; count++ )
         timingLeftValue0 += ( 65536-(timingValueH[count]*256+timingValueL[count]) );
-    timingValueH[8] = timingLeftValue0>>8;	//¸üĞÂÊ£ÓàµÍµçÆ½Ê±¼ä
+    timingValueH[8] = timingLeftValue0>>8;	//æ›´æ–°å‰©ä½™ä½ç”µå¹³æ—¶é—´
     timingValueL[8] = (timingLeftValue0<<8)>>8;
 }
 
@@ -165,7 +165,7 @@ int getSteering(int num)
 }
 
 
-void set_circle_pwm7(uchar num)//ÆôÓÃpwm7Ñ­»·×ª 1ÎªÆôÓÃ 0Îª¹Ø±Õ
+void set_circle_pwm7(uchar num)//å¯ç”¨pwm7å¾ªç¯è½¬ 1ä¸ºå¯ç”¨ 0ä¸ºå…³é—­
 {
 	if( num )
 	{
@@ -179,14 +179,14 @@ void set_circle_pwm7(uchar num)//ÆôÓÃpwm7Ñ­»·×ª 1ÎªÆôÓÃ 0Îª¹Ø±Õ
 	}
 }
 
-void open_Dustbin(uchar num)//¿ª¹ØÀ¬»øÏä 1ÎªÆôÓÃ 0Îª¹Ø±Õ
+void open_Dustbin(uchar num)//å¼€å…³åƒåœ¾ç®± 1ä¸ºå¯ç”¨ 0ä¸ºå…³é—­
 {
-	if( num )//¸ßµçÆ½1500us
+	if( num )//é«˜ç”µå¹³1500us
 	{
 		timingValueH[6] = 0xFA;
 		timingValueL[6] = 0x24;
 	}
-	else//¸ßµçÆ½550us
+	else//é«˜ç”µå¹³550us
 	{
 		timingValueH[6] = 0xFD;
 		timingValueL[6] = 0xDA;

@@ -25,24 +25,24 @@ sbit CAR6 = P4^5;
 sbit CAR7 = P4^6;
 sbit CAR8 = P1^7;
 
-//¸÷¸öËÙ¶ÈÖµ
+//å„ä¸ªé€Ÿåº¦å€¼
 extern uchar CAR12Speed;
 extern uchar CAR34Speed;
 extern uchar WaterSpeed;
 extern uchar CleanSpeed;
 extern uchar LedSpeed;
 
-extern void Forward();//ÏòÇ°
-extern void Back();//Ïòºó
-extern void Turnrigth();//ÓÒ×ª
-extern void Turnleft();//×ó×ª
-extern void Stop();//Í£³µ
-extern void StartWater();//¿ªÆôË®Ïä
-extern void StopWater();//Í£Ö¹Ë®Ïä
-extern void StartClean();//¿ªÆôÇå½à
-extern void StopClean();//Í£Ö¹Çå½à
-extern void SetLed(uchar num);//numÎª0Ê±¹Ø±Õ ¿ªÆôµÄÖµÎª1-9,1×î´ó 9×îĞ¡
-extern void SetSpeed(uchar s);//ÉèÖÃËÙ¶È ÖµÎª1-9,1×î´ó 9×îĞ¡ 0Ê±¹Ø±Õ
+extern void Forward();//å‘å‰
+extern void Back();//å‘å
+extern void Turnrigth();//å³è½¬
+extern void Turnleft();//å·¦è½¬
+extern void Stop();//åœè½¦
+extern void StartWater();//å¼€å¯æ°´ç®±
+extern void StopWater();//åœæ­¢æ°´ç®±
+extern void StartClean();//å¼€å¯æ¸…æ´
+extern void StopClean();//åœæ­¢æ¸…æ´
+extern void SetLed(uchar num);//numä¸º0æ—¶å…³é—­ å¼€å¯çš„å€¼ä¸º1-9,1æœ€å¤§ 9æœ€å°
+extern void SetSpeed(uchar s);//è®¾ç½®é€Ÿåº¦ å€¼ä¸º1-9,1æœ€å¤§ 9æœ€å° 0æ—¶å…³é—­
 
 
 #endif

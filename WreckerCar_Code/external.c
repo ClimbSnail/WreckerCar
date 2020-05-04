@@ -1,13 +1,13 @@
 #include "external.h"
 
-static char ext0,ext1;   //ÖĞ¶ÏµÄ±êÖ¾Î»
+static char ext0,ext1;   //ä¸­æ–­çš„æ ‡å¿—ä½
 
-void exint0(void) interrupt 0  //Íâ²¿ÖĞ¶Ï0µÄÖĞ¶Ï·şÎñ³ÌĞò
+void exint0(void) interrupt 0  //å¤–éƒ¨ä¸­æ–­0çš„ä¸­æ–­æœåŠ¡ç¨‹åº
 {
     ext0 = 1;
 }
 
-void ext0_init()		//Íâ²¿ÖĞ¶Ï0µÄ³õÊ¼»¯
+void ext0_init()		//å¤–éƒ¨ä¸­æ–­0çš„åˆå§‹åŒ–
 {
     IT0 = 1;
     EX0 = 1;
@@ -15,19 +15,19 @@ void ext0_init()		//Íâ²¿ÖĞ¶Ï0µÄ³õÊ¼»¯
     ext0 = 0;
 }
 
-char get_ext0()		  //²éÑ¯ÊÇ·ñ²úÉúÖĞ¶Ï
+char get_ext0()		  //æŸ¥è¯¢æ˜¯å¦äº§ç”Ÿä¸­æ–­
 {
     char temp = ext0;
     ext0 = 0;
-    return temp;	//·µ»Ø²éÑ¯µÄÖµ
+    return temp;	//è¿”å›æŸ¥è¯¢çš„å€¼
 }
 
-void exint1(void) interrupt 2  //Íâ²¿ÖĞ¶Ï0µÄÖĞ¶Ï·şÎñ³ÌĞò
+void exint1(void) interrupt 2  //å¤–éƒ¨ä¸­æ–­0çš„ä¸­æ–­æœåŠ¡ç¨‹åº
 {
     ext1 = 1;
 }
 
-void ext1_init()		//Íâ²¿ÖĞ¶Ï0µÄ³õÊ¼»¯
+void ext1_init()		//å¤–éƒ¨ä¸­æ–­0çš„åˆå§‹åŒ–
 {
     IT1 = 1;
     EX1 = 1;
@@ -35,10 +35,10 @@ void ext1_init()		//Íâ²¿ÖĞ¶Ï0µÄ³õÊ¼»¯
     ext1 = 0;
 }
 
-char get_ext1()		  //²éÑ¯ÊÇ·ñ²úÉúÖĞ¶Ï
+char get_ext1()		  //æŸ¥è¯¢æ˜¯å¦äº§ç”Ÿä¸­æ–­
 {
     char temp = ext1;
     ext1 = 0;
-    return temp;	//·µ»Ø²éÑ¯µÄÖµ
+    return temp;	//è¿”å›æŸ¥è¯¢çš„å€¼
 }
 

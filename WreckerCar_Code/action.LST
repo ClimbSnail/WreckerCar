@@ -13,12 +13,12 @@ line level    source
    4          static uint cos_pwm[180];//?????????pwm
    5          void Init_cos_pwm();
    6          
-   7          void steering_init()//¶æ»ú³õÊ¼»¯
+   7          void steering_init()//èˆµæœºåˆå§‹åŒ–
    8          {
    9   1          Init_cos_pwm();
   10   1      }
   11          
-  12          void Init_cos_pwm()//¼ÆËã¸÷¸ö½Ç¶È¶ÔÓ¦µÄPWMÊıÖµ
+  12          void Init_cos_pwm()//è®¡ç®—å„ä¸ªè§’åº¦å¯¹åº”çš„PWMæ•°å€¼
   13          {
   14   1          int i;
   15   1          for( i = 1 ; i<181 ; i++ )
@@ -26,18 +26,18 @@ line level    source
   17   1      }
   18          
   19          
-  20          void Change_angle(float x,float z) //¼ÆËã²¢¸üĞÂ¶æ»ú½Ç¶È
+  20          void Change_angle(float x,float z) //è®¡ç®—å¹¶æ›´æ–°èˆµæœºè§’åº¦
   21          {
   22   1          if( z >= 0 )
   23   1          {
   24   2              float arm_long=sqrt(x*x+z*z);//?????
   25   2      
-  26   2              //¼ÆËãÈı¸ö½Ç¸÷×ÔµÄÓàÏÒÖµ
+  26   2              //è®¡ç®—ä¸‰ä¸ªè§’å„è‡ªçš„ä½™å¼¦å€¼
   27   2              float cosa = x/arm_long;
   28   2              float cosb = (105*105+arm_long*arm_long-97*97)/2/105/arm_long;
   29   2              float cosc = (97*97+arm_long*arm_long-105*105)/2/97/arm_long;
   30   2      
-  31   2              //¼ÆËã½Ç¶È
+  31   2              //è®¡ç®—è§’åº¦
   32   2              int angle_a = (int)(acos(cosa)*180/3.14);
   33   2              int angle_b = (int)(acos(cosb)*180/3.14);
   34   2              int angle_c = (int)(acos(cosc)*180/3.14);
@@ -52,12 +52,12 @@ line level    source
   43   1          {
   44   2              float arm_long=sqrt(x*x+z*z);
   45   2      
-  46   2              //¼ÆËãÈı¸ö½Ç¸÷×ÔµÄÓàÏÒÖµ
+  46   2              //è®¡ç®—ä¸‰ä¸ªè§’å„è‡ªçš„ä½™å¼¦å€¼
   47   2              float cosa = x/arm_long;
   48   2              float cosb = (arm_long*arm_long+97*97-160*160)/2/97/arm_long;
   49   2              float cosc = (97*97+160*160-arm_long*arm_long)/2/97/160;
   50   2      
-  51   2              //¼ÆËã½Ç¶È
+  51   2              //è®¡ç®—è§’åº¦
   52   2              int angle_a = (int)(acos(cosa)*180/3.14);
   53   2              int angle_b = (int)(acos(cosb)*180/3.14);
   54   2              int angle_c = (int)(acos(cosc)*180/3.14);
@@ -73,12 +73,12 @@ line level    source
   62   2              updata_TimingLeft();
   63   2          }
   64   1      }
-  65          void steering_pwm_change(void)   //¶æ»úPWMµÄ¸üĞÂ
+  65          void steering_pwm_change(void)   //èˆµæœºPWMçš„æ›´æ–°
   66          {
   67   1          pwm_change(2,target_pwm_duty[0]+150);
   68   1          pwm_change(3,target_pwm_duty[1]);
   69   1          pwm_change(4,target_pwm_duty[2]);
-  70   1          updata_TimingLeft();  //¼ÆËãPWMÊ£ÓàµÄµÍµçÆ½Ê±¼ä
+  70   1          updata_TimingLeft();  //è®¡ç®—PWMå‰©ä½™çš„ä½ç”µå¹³æ—¶é—´
   71   1      }
 
 

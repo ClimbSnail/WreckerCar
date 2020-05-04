@@ -5,12 +5,12 @@
 #define uchar unsigned char
 #define uint  unsigned int
 
-//extern uchar receiveFlag;  //½ÓÊÕ±êÖ¾
-//extern uchar message;	 //ÏûÏ¢
-extern void uart_init12M(uint  baudRate);//´®¿Ú³õÊ¼»¯ baud_rateÎªÒªÉè¶¨µÄÖµ 12M¾§Õñ
-extern void uart_init110592M(uint  baudRate);//´®¿Ú³õÊ¼»¯ baud_rateÎªÒªÉè¶¨µÄÖµ 11.0592M¾§Õñ
-extern void UART_send_char(uchar *dat); //·¢ËÍ×Ö·û´®
-extern void UART_send(uchar dat);		  //·¢ËÍ×Ö·û
-extern int UART_check(uchar dat);//ÆæĞ£Ñé
+//extern uchar receiveFlag;  //æ¥æ”¶æ ‡å¿—
+//extern uchar message;	 //æ¶ˆæ¯
+extern void uart_init12M(uint  baudRate);//ä¸²å£åˆå§‹åŒ– baud_rateä¸ºè¦è®¾å®šçš„å€¼ 12Mæ™¶æŒ¯
+extern void uart_init110592M(uint  baudRate);//ä¸²å£åˆå§‹åŒ– baud_rateä¸ºè¦è®¾å®šçš„å€¼ 11.0592Mæ™¶æŒ¯
+extern void UART_send_char(uchar *dat); //å‘é€å­—ç¬¦ä¸²
+extern void UART_send(uchar dat);		  //å‘é€å­—ç¬¦
+extern int UART_check(uchar dat);//å¥‡æ ¡éªŒ
 
 #endif

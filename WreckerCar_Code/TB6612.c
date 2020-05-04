@@ -47,7 +47,7 @@ void Stop()
 	CAR4 = 0;
 }
 
-void SetSpeed(uchar s)//ÉèÖÃËÙ¶È ÖµÎª1-9,1×î´ó 9×îĞ¡ 0Ê±¹Ø±Õ
+void SetSpeed(uchar s)//è®¾ç½®é€Ÿåº¦ å€¼ä¸º1-9,1æœ€å¤§ 9æœ€å° 0æ—¶å…³é—­
 {
 	CAR12Speed = s;
 	CAR34Speed = s;
@@ -73,7 +73,7 @@ void StopClean()
 	CleanSpeed = 0;
 }
 
-void SetLed(uchar num)//numÎª0Ê±¹Ø±Õ ¿ªÆôµÄÖµÎª1-9,1×î´ó 9×îĞ¡
+void SetLed(uchar num)//numä¸º0æ—¶å…³é—­ å¼€å¯çš„å€¼ä¸º1-9,1æœ€å¤§ 9æœ€å°
 {
 	CAR5 = 0;
 	CAR6 = 1;

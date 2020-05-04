@@ -4,12 +4,12 @@ uint target_pwm_duty[3]= {1500,1500,1500}; //??pwm
 static uint cos_pwm[180];//?????????pwm
 void Init_cos_pwm();
 
-void steering_init()//¶æ»ú³õÊ¼»¯
+void steering_init()//èˆµæœºåˆå§‹åŒ–
 {
     Init_cos_pwm();
 }
 
-void Init_cos_pwm()//¼ÆËã¸÷¸ö½Ç¶È¶ÔÓ¦µÄPWMÊıÖµ
+void Init_cos_pwm()//è®¡ç®—å„ä¸ªè§’åº¦å¯¹åº”çš„PWMæ•°å€¼
 {
     int i;
     for( i = 1 ; i<181 ; i++ )
@@ -17,23 +17,23 @@ void Init_cos_pwm()//¼ÆËã¸÷¸ö½Ç¶È¶ÔÓ¦µÄPWMÊıÖµ
 }
 
 
-void Change_angle(float x,float z) //¼ÆËã²¢¸üĞÂ¶æ»ú½Ç¶È
+void Change_angle(float x,float z) //è®¡ç®—å¹¶æ›´æ–°èˆµæœºè§’åº¦
 {
     if( z >= 0 )
     {
         float arm_long=sqrt(x*x+z*z);//?????
 
-        //¼ÆËãÈı¸ö½Ç¸÷×ÔµÄÓàÏÒÖµ
+        //è®¡ç®—ä¸‰ä¸ªè§’å„è‡ªçš„ä½™å¼¦å€¼
         float cosa = x/arm_long;
         float cosb = (105*105+arm_long*arm_long-145*145)/2/105/arm_long;
         float cosc = (145*145+arm_long*arm_long-105*105)/2/145/arm_long;
 
-        //¼ÆËã½Ç¶È
+        //è®¡ç®—è§’åº¦
         int angle_a = (int)(acos(cosa)*180/3.14);
         int angle_b = (int)(acos(cosb)*180/3.14);
         int angle_c = (int)(acos(cosc)*180/3.14);
 
-        target_pwm_duty[0] = cos_pwm[45+ (angle_a - angle_c)];//´ËÎª·´Ïò¶æ»ú
+        target_pwm_duty[0] = cos_pwm[45+ (angle_a - angle_c)];//æ­¤ä¸ºåå‘èˆµæœº
         target_pwm_duty[1] = cos_pwm[90 - (angle_b + angle_c)];
         target_pwm_duty[2] = cos_pwm[180- angle_a - angle_b ] ;
 
@@ -43,12 +43,12 @@ void Change_angle(float x,float z) //¼ÆËã²¢¸üĞÂ¶æ»ú½Ç¶È
     {
         float arm_long=sqrt(x*x+z*z);
 
-        //¼ÆËãÈı¸ö½Ç¸÷×ÔµÄÓàÏÒÖµ
+        //è®¡ç®—ä¸‰ä¸ªè§’å„è‡ªçš„ä½™å¼¦å€¼
         float cosa = x/arm_long;
         float cosb = (arm_long*arm_long+145*145-180*180)/2/145/arm_long;
         float cosc = (145*145+180*180-arm_long*arm_long)/2/145/180;
 
-        //¼ÆËã½Ç¶È
+        //è®¡ç®—è§’åº¦
         int angle_a = (int)(acos(cosa)*180/3.14);
         int angle_b = (int)(acos(cosb)*180/3.14);
         int angle_c = (int)(acos(cosc)*180/3.14);
@@ -62,10 +62,10 @@ void Change_angle(float x,float z) //¼ÆËã²¢¸üĞÂ¶æ»ú½Ç¶È
         updata_TimingLeft();
     }
 }
-void steering_pwm_change(void)	 //¶æ»úPWMµÄ¸üĞÂ
+void steering_pwm_change(void)	 //èˆµæœºPWMçš„æ›´æ–°
 {
     pwm_change(2,target_pwm_duty[0]);
     pwm_change(3,target_pwm_duty[1]);
     pwm_change(4,target_pwm_duty[2]);
-    updata_TimingLeft();	//¼ÆËãPWMÊ£ÓàµÄµÍµçÆ½Ê±¼ä
+    updata_TimingLeft();	//è®¡ç®—PWMå‰©ä½™çš„ä½ç”µå¹³æ—¶é—´
 }

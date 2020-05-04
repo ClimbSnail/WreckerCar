@@ -6,13 +6,13 @@
 #define uint  unsigned int
 
 
-extern int getSteering(int num);//»ñÈ¡¶æ»úµÄÖµ
-extern void timer0_init();//¶¨Ê±Æ÷0³õÊ¼»¯
-extern void timer1_init();//¶¨Ê±Æ÷1³õÊ¼»¯
-extern void pwm_change(uchar pwmNumber,uint pwmDuty); //pwmNumber·¶Î§0~7 pwmDuty(1~2500)
-extern void updata_TimingLeft();	//¸üĞÂÊ£ÓàµÍµçÆ½Ê±¼ä
-extern void set_circle_pwm7(uchar num);//ÆôÓÃpwm7Ñ­»·×ª 1ÎªÆôÓÃ 0Îª¹Ø±Õ
-extern void open_Dustbin(uchar num);//¿ª¹ØÀ¬»øÏä 1ÎªÆôÓÃ 0Îª¹Ø±Õ
+extern int getSteering(int num);//è·å–èˆµæœºçš„å€¼
+extern void timer0_init();//å®šæ—¶å™¨0åˆå§‹åŒ–
+extern void timer1_init();//å®šæ—¶å™¨1åˆå§‹åŒ–
+extern void pwm_change(uchar pwmNumber,uint pwmDuty); //pwmNumberèŒƒå›´0~7 pwmDuty(1~2500)
+extern void updata_TimingLeft();	//æ›´æ–°å‰©ä½™ä½ç”µå¹³æ—¶é—´
+extern void set_circle_pwm7(uchar num);//å¯ç”¨pwm7å¾ªç¯è½¬ 1ä¸ºå¯ç”¨ 0ä¸ºå…³é—­
+extern void open_Dustbin(uchar num);//å¼€å…³åƒåœ¾ç®± 1ä¸ºå¯ç”¨ 0ä¸ºå…³é—­
 
 
 #endif
