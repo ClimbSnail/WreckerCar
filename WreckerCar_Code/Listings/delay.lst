@@ -1,0 +1,294 @@
+C51 COMPILER V9.54   DELAY                                                                 12/11/2017 20:18:13 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE DELAY
+OBJECT MODULE PLACED IN .\Objects\delay.obj
+COMPILER INVOKED BY: D:\MDK\C51\BIN\C51.EXE delay.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\d
+                    -elay.lst) TABS(2) OBJECT(.\Objects\delay.obj)
+
+line level    source
+
+   1          #include "delay.h"
+   2          
+   3          void Delay2500ms()    //@12.000MHz
+   4          {
+   5   1          unsigned char i, j, k;
+   6   1      
+   7   1      //  _nop_();
+   8   1      //  _nop_();
+   9   1          i = 114;
+  10   1          j = 255;
+  11   1          k = 107;
+  12   1          do
+  13   1          {
+  14   2              do
+  15   2              {
+  16   3                  while (--k);
+  17   3              }
+  18   2              while (--j);
+  19   2          }
+  20   1          while (--i);
+  21   1      }
+  22          
+  23          void Delay1000ms()    //@12.000MHz
+  24          {
+  25   1          unsigned char i, j, k;
+  26   1      
+  27   1      //  _nop_();
+  28   1      //  _nop_();
+  29   1          i = 46;
+  30   1          j = 153;
+  31   1          k = 245;
+  32   1          do
+  33   1          {
+  34   2              do
+  35   2              {
+  36   3                  while (--k);
+  37   3              }
+  38   2              while (--j);
+  39   2          }
+  40   1          while (--i);
+  41   1      }
+  42          
+  43          void Delay500ms()   //@12.000MHz
+  44          {
+  45   1          unsigned char i, j, k;
+  46   1      
+  47   1      //  _nop_();
+  48   1      //  _nop_();
+  49   1          i = 23;
+  50   1          j = 205;
+  51   1          k = 120;
+  52   1          do
+  53   1          {
+  54   2              do
+C51 COMPILER V9.54   DELAY                                                                 12/11/2017 20:18:13 PAGE 2   
+
+  55   2              {
+  56   3                  while (--k);
+  57   3              }
+  58   2              while (--j);
+  59   2          }
+  60   1          while (--i);
+  61   1      }
+  62          
+  63          void Delay300ms()   //@12.000MHz
+  64          {
+  65   1          unsigned char i, j, k;
+  66   1      
+  67   1      //  _nop_();
+  68   1      //  _nop_();
+  69   1          i = 14;
+  70   1          j = 174;
+  71   1          k = 224;
+  72   1          do
+  73   1          {
+  74   2              do
+  75   2              {
+  76   3                  while (--k);
+  77   3              }
+  78   2              while (--j);
+  79   2          }
+  80   1          while (--i);
+  81   1      }
+  82          
+  83          void Delay200ms()   //@12.000MHz
+  84          {
+  85   1          unsigned char i, j, k;
+  86   1      
+  87   1      //  _nop_();
+  88   1      //  _nop_();
+  89   1          i = 10;
+  90   1          j = 31;
+  91   1          k = 147;
+  92   1          do
+  93   1          {
+  94   2              do
+  95   2              {
+  96   3                  while (--k);
+  97   3              }
+  98   2              while (--j);
+  99   2          }
+ 100   1          while (--i);
+ 101   1      }
+ 102          
+ 103          void Delay150ms()   //@12.000MHz
+ 104          {
+ 105   1          unsigned char i, j, k;
+ 106   1      
+ 107   1      //  _nop_();
+ 108   1      //  _nop_();
+ 109   1          i = 7;
+ 110   1          j = 215;
+ 111   1          k = 238;
+ 112   1          do
+ 113   1          {
+ 114   2              do
+ 115   2              {
+ 116   3                  while (--k);
+C51 COMPILER V9.54   DELAY                                                                 12/11/2017 20:18:13 PAGE 3   
+
+ 117   3              }
+ 118   2              while (--j);
+ 119   2          }
+ 120   1          while (--i);
+ 121   1      }
+ 122          
+ 123          void Delay100ms()   //@12.000MHz
+ 124          {
+ 125   1          unsigned char i, j, k;
+ 126   1      
+ 127   1      //  _nop_();
+ 128   1      //  _nop_();
+ 129   1          i = 5;
+ 130   1          j = 144;
+ 131   1          k = 71;
+ 132   1          do
+ 133   1          {
+ 134   2              do
+ 135   2              {
+ 136   3                  while (--k);
+ 137   3              }
+ 138   2              while (--j);
+ 139   2          }
+ 140   1          while (--i);
+ 141   1      }
+ 142          
+ 143          void Delay20ms()    //@12.000MHz
+ 144          {
+ 145   1          unsigned char i, j, k;
+ 146   1      
+ 147   1      //  _nop_();
+ 148   1      //  _nop_();
+ 149   1          i = 1;
+ 150   1          j = 234;
+ 151   1          k = 113;
+ 152   1          do
+ 153   1          {
+ 154   2              do
+ 155   2              {
+ 156   3                  while (--k);
+ 157   3              }
+ 158   2              while (--j);
+ 159   2          }
+ 160   1          while (--i);
+ 161   1      }
+ 162          
+ 163          void Delay10ms()    //@12.000MHz
+ 164          {
+ 165   1          unsigned char i, j;
+ 166   1      
+ 167   1          i = 117;
+ 168   1          j = 184;
+ 169   1          do
+ 170   1          {
+ 171   2              while (--j);
+ 172   2          }
+ 173   1          while (--i);
+ 174   1      }
+ 175          
+ 176          void Delay5ms()   //@12.000MHz
+ 177          {
+ 178   1          unsigned char i, j;
+C51 COMPILER V9.54   DELAY                                                                 12/11/2017 20:18:13 PAGE 4   
+
+ 179   1      
+ 180   1          i = 59;
+ 181   1          j = 90;
+ 182   1          do
+ 183   1          {
+ 184   2              while (--j);
+ 185   2          }
+ 186   1          while (--i);
+ 187   1      }
+ 188          
+ 189          void Delay3ms()   //@12.000MHz
+ 190          {
+ 191   1          unsigned char i, j;
+ 192   1      
+ 193   1          i = 36;
+ 194   1          j = 1;
+ 195   1          do
+ 196   1          {
+ 197   2              while (--j);
+ 198   2          }
+ 199   1          while (--i);
+ 200   1      }
+ 201          
+ 202          void Delay1ms()   //@12.000MHz
+ 203          {
+ 204   1          unsigned char i, j;
+ 205   1      
+ 206   1          i = 12;
+ 207   1          j = 169;
+ 208   1          do
+ 209   1          {
+ 210   2              while (--j);
+ 211   2          }
+ 212   1          while (--i);
+ 213   1      }
+ 214          
+ 215          void Delay500us()   //@12.000MHz
+ 216          {
+ 217   1          unsigned char i, j;
+ 218   1      
+ 219   1          i = 6;
+ 220   1          j = 211;
+ 221   1          do
+ 222   1          {
+ 223   2              while (--j);
+ 224   2          }
+ 225   1          while (--i);
+ 226   1      }
+ 227          
+ 228          void Delay200us()   //@12.000MHz
+ 229          {
+ 230   1          unsigned char i, j;
+ 231   1      
+ 232   1          i = 3;
+ 233   1          j = 82;
+ 234   1          do
+ 235   1          {
+ 236   2              while (--j);
+ 237   2          }
+ 238   1          while (--i);
+ 239   1      }
+ 240          
+C51 COMPILER V9.54   DELAY                                                                 12/11/2017 20:18:13 PAGE 5   
+
+ 241          void Delay50us()    //@12.000MHz
+ 242          {
+ 243   1          unsigned char i, j;
+ 244   1      
+ 245   1          i = 1;
+ 246   1          j = 146;
+ 247   1          do
+ 248   1          {
+ 249   2              while (--j);
+ 250   2          }
+ 251   1          while (--i);
+ 252   1      }
+ 253          
+ 254          void Delay20us()    //@12.000MHz
+ 255          {
+ 256   1          unsigned char i;
+ 257   1      
+ 258   1      //  _nop_();
+ 259   1      //  _nop_();
+ 260   1          i = 57;
+ 261   1          while (--i);
+ 262   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    172    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

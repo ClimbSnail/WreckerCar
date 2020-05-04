@@ -1,0 +1,228 @@
+C51 COMPILER V9.54   STEERING                                                              11/16/2017 15:46:26 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE STEERING
+OBJECT MODULE PLACED IN .\Objects\steering.obj
+COMPILER INVOKED BY: D:\MDK\C51\BIN\C51.EXE steering.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listing
+                    -s\steering.lst) TABS(2) OBJECT(.\Objects\steering.obj)
+
+line level    source
+
+   1          #include "steering.h"
+   2          #include "timer.h"
+   3          #include "led.h"
+*** WARNING C318 IN LINE 3 OF steering.c: can't open file 'led.h'
+   4          
+   5          #define PI 3.14
+   6          //???????
+   7          
+   8          unsigned char mark[6] = {0x00,0x00,0x00};//pwm???1,???0
+   9          u16 now_pwm_duty[]= {1500,1500,1500}; //???pwm
+*** ERROR C129 IN LINE 9 OF steering.c: missing ';' before 'now_pwm_duty'
+  10          u16 target_pwm_duty[]= {1500,1500,1500}; //??pwm
+  11          u16 cos_pwm[180];//?????????pwm
+  12          
+  13          void Init_cos_pwm(void);
+  14          void Change_angle(float x,float z);//?????,????x,z??????????????
+  15          void steering_pwm_change1(void);
+  16          float Sqrt_2(float d);  //?????(?????)
+  17          float Sqrt_1(float x);  //??????????
+  18          float pow_2(float x); //?????
+  19          int Seach_angle(float cos); //?????????????????
+  20          void steering_pwm_change(void); //??????
+  21          //
+  22          void delay_ms1(unsigned int z)
+  23          {
+  24              unsigned int v;
+  25              for( ; z>0; z--)
+  26                  for(v=100; v>0; v--);
+  27          }
+  28          void steering_init(void)//???
+  29          {
+  30              Init_cos_pwm();
+  31          }
+  32          
+  33          float cos_form[181]=    //1~90???????
+  34          {
+  35              0.99985,0.99939,0.99863,0.99756,0.99619,0.99452,0.99255,0.99027,0.98769,0.98481,
+  36              0.98163,0.97815,0.97437,0.97030,0.96593,0.96126,0.95630,0.95106,0.94552,0.93969,
+  37              0.93358,0.92718,0.92050,0.91355,0.90631,0.89879,0.89101,0.88295,0.87462,0.86603,
+  38              0.85717,0.84805,0.83867,0.82904,0.81915,0.80902,0.79864,0.78801,0.77715,0.76604,
+  39              0.75471,0.74314,0.73135,0.71934,0.70711,0.69466,0.68200,0.66913,0.65606,0.64279,
+  40              0.62932,0.61566,0.60182,0.58779,0.57358,0.55919,0.54464,0.52992,0.51504,0.50000,
+  41              0.48481,0.46947,0.45399,0.43837,0.42262,0.40674,0.39073,0.37461,0.35837,0.34202,
+  42              0.32557,0.30902,0.29237,0.27564,0.25882,0.24192,0.22495,0.20791,0.19081,0.17365,
+  43              0.15643,0.13917,0.12187,0.10453,0.08716,0.06976,0.05234,0.03490,0.01745,0,
+  44          
+  45              -0.01745,-0.03490,-0.05234,-0.06976,-0.08716,-0.10453,-0.12187,-0.13917,-0.15643,
+  46              -0.17365,-0.19081,-0.20791,-0.22495,-0.24192,-0.25882,-0.27564,-0.29237,-0.30902,-0.32557,
+  47              -0.34202,-0.35837,-0.37461,-0.39073,-0.40674,-0.42262,-0.43837,-0.45399,-0.46947,-0.48481,
+  48              -0.50000,-0.51504,-0.52992,-0.54464,-0.55919,-0.57358,-0.58779,-0.60182,-0.61566,-0.62932,
+  49              -0.64279,-0.65606,-0.66913,-0.68200,-0.69466,-0.70711,-0.71934,-0.73135,-0.74314,-0.75471,
+  50              -0.76604,-0.77715,-0.78801,-0.79864,-0.80902,-0.81915,-0.82904,-0.83867,-0.84805,-0.85717,
+  51              -0.86603,-0.87462,-0.88295,-0.89101,-0.89879,-0.90631,-0.91355,-0.92050,-0.92718,-0.93358,
+  52              -0.93969,-0.94552,-0.95106,-0.95630,-0.96126,-0.96593,-0.97030,-0.97437,-0.97815,-0.98163,
+C51 COMPILER V9.54   STEERING                                                              11/16/2017 15:46:26 PAGE 2   
+
+  53              -0.98481,-0.98769,-0.99027,-0.99255,-0.99452,-0.99619,-0.99756,-0.99863,-0.99939,-0.99985,
+  54              -1
+  55          
+  56          };
+  57          
+  58          void Init_cos_pwm(void)//???cos_pwm??
+  59          {
+  60              int i;
+  61          //    for( i = 180 ; i>0 ; i-- )
+  62              for( i = 1 ; i<181 ; i++ )
+  63                  cos_pwm[i-1] = 500+i*11.11;//??pwm???????
+  64          }
+  65          
+  66          float Sqrt_2(float dou)//?????(?????)
+  67          {
+  68              double x,y;
+  69              x=0.0;
+  70              y=dou/2;
+  71              while(x!=y)
+  72              {
+  73                  x=y;
+  74                  y=(x+dou/x)/2;
+  75              }
+  76              return x;
+  77          }
+  78          
+  79          float Sqrt_1(float x) //??????????
+  80          {
+  81              float xhalf = 0.5f*x;
+  82              int i = *(int *)&x;
+  83              i = 0x5f375a86-(i>>1);
+  84              x = *(float *)&i;
+  85              x = x*(1.5f-xhalf*x*x);
+  86              x = x*(1.5f-xhalf*x*x);
+  87              x = x*(1.5f-xhalf*x*x);
+  88              return 1/x;
+  89          }
+  90          
+  91          int Seach_angle(float cos) //?????????????????
+  92          {
+  93              int l=1,r=180;
+  94              int middle;
+  95              while(l<r)
+  96              {
+  97                  middle = (l+r)/2;
+  98                  if( cos < cos_form[middle] )
+  99                      l = middle + 1;
+ 100                  else if(cos > cos_form[middle])
+ 101                      r = middle - 1;
+ 102                  else return middle;
+ 103              }
+ 104              return r;
+ 105          }
+ 106          
+ 107          void Change_angle(float x,float z)//?????,????x,z??????????????
+ 108          {
+ 109              if( z >= 0 )
+ 110              {
+ 111                  float arm_long=Sqrt_2(x*x+z*z);//?????
+ 112                  float cosa = x/arm_long;
+ 113                  float cosb = (105*105+arm_long*arm_long-97*97)/2/105/arm_long;
+ 114                  float cosc = (97*97+arm_long*arm_long-105*105)/2/97/arm_long;
+C51 COMPILER V9.54   STEERING                                                              11/16/2017 15:46:26 PAGE 3   
+
+ 115          
+ 116                  int angle_a = Seach_angle(cosa);
+ 117                  int angle_b = Seach_angle(cosb);
+ 118                  int angle_c = Seach_angle(cosc);
+ 119                  //???????pwm?
+ 120                  target_pwm_duty[0] = cos_pwm[90 - (angle_a - angle_c)];
+ 121                  target_pwm_duty[1] = cos_pwm[90 - (angle_b + angle_c)];
+ 122                  target_pwm_duty[2] = cos_pwm[180- angle_a - angle_b ] ;
+ 123          
+ 124                  steering_pwm_change1();
+ 125              }
+ 126              else
+ 127              {
+ 128                  float arm_long=Sqrt_2(x*x+z*z);
+ 129                  float cosa = x/arm_long;
+ 130                  float cosb = (arm_long*arm_long+97*97-160*160)/2/97/arm_long;
+ 131                  float cosc = (97*97+160*160-arm_long*arm_long)/2/97/160;
+ 132          
+ 133                  int angle_a = Seach_angle(cosa);
+ 134                  int angle_b = Seach_angle(cosb);
+ 135                  int angle_c = Seach_angle(cosc);
+ 136                  target_pwm_duty[0] = cos_pwm[ angle_c - 90 ];
+ 137                  target_pwm_duty[1] = cos_pwm[90 + (angle_b - angle_a)];
+ 138          
+ 139              pwm_change(2,target_pwm_duty[0]);
+ 140              pwm_change(3,target_pwm_duty[1]);
+ 141              pwm_change(4,2500);
+ 142              }
+ 143          }
+ 144          void steering_pwm_change1(void)
+ 145          {
+ 146          //    SREET3 = target_pwm_duty[0];
+ 147            pwm_change(2,target_pwm_duty[0]);
+ 148          //    SREET4 = target_pwm_duty[1];
+ 149            pwm_change(3,target_pwm_duty[1]);
+ 150          //    SREET5 = target_pwm_duty[2];
+ 151            pwm_change(4,target_pwm_duty[2]);
+ 152          }
+ 153          void steering_pwm_change(void)//??????
+ 154          {
+ 155              u16 a=50;//????pwm??? ?1?pwm??92 10?????10?
+ 156              int i;
+ 157              for( i=0 ; i<3 ; i++ )
+ 158              {
+ 159                  if( mark[i]==0x02 && now_pwm_duty[i]<target_pwm_duty[i] )
+ 160                  {
+ 161                      now_pwm_duty[i] += a;
+ 162                      if( now_pwm_duty[i]>=target_pwm_duty[i] )
+ 163                      {
+ 164                          now_pwm_duty[i] = target_pwm_duty[i];
+ 165                          mark[i] = 0x00;
+ 166                      }
+ 167                      switch (i)
+ 168                      {
+ 169                      case 0:
+ 170                          SREET3 = now_pwm_duty[0];
+ 171                          break;
+ 172                      case 1:
+ 173                          SREET4 = now_pwm_duty[1];
+ 174                          break;
+ 175                      case 2:
+ 176                          SREET5 = now_pwm_duty[2];
+C51 COMPILER V9.54   STEERING                                                              11/16/2017 15:46:26 PAGE 4   
+
+ 177                          break;
+ 178                      default:
+ 179                          break;
+ 180                      }
+ 181                  }
+ 182          
+ 183                  else if( mark[i]==0x01 && now_pwm_duty[i]>target_pwm_duty[i] )
+ 184                  {
+ 185                      now_pwm_duty[i] -= a;
+ 186                      if( now_pwm_duty[i]<=target_pwm_duty[i] )
+ 187                      {
+ 188                          now_pwm_duty[i] = target_pwm_duty[i];
+ 189                          mark[i] = 0x00;
+ 190                      }
+ 191                      switch (i)
+ 192                      {
+ 193                      case 0:
+ 194                          SREET3 = now_pwm_duty[0];
+ 195                          break;
+ 196                      case 1:
+ 197                          SREET4 = now_pwm_duty[1];
+ 198                          break;
+ 199                      case 2:
+ 200                          SREET5 = now_pwm_duty[2];
+ 201                          break;
+ 202                      default:
+ 203                          break;
+ 204                      }
+ 205                  }
+ 206              }
+ 207          
+ 208          }
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  1 ERROR(S)
