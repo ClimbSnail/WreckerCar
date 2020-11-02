@@ -1,5 +1,6 @@
 ## 机械臂清障车介绍
 本作品参加2017年12月中日韩创新工程竞赛，获金奖（大三上参加的）
+![image.jpg](./Image/WreckerCar_mini.jpg)
 
 B站视频[链接](https://b23.tv/BV1qs411L7e6) https://b23.tv/BV1qs411L7e6
 
@@ -39,7 +40,8 @@ B站视频[链接](https://b23.tv/BV1qs411L7e6) https://b23.tv/BV1qs411L7e6
 * 多功能消防清障车说明书.doc _（中日韩2017比赛时提交的作品说明书）_
 	
 #### PCB 3D预览图
-![image.jpg](https://github.com/ClimbSnail/WreckerCar/blob/master/image.jpg)
+
+![image.jpg](./Image/picture1.png)
 
 
 #### 电路存在的问题
