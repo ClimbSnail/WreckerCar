@@ -3,13 +3,13 @@
 
 ![](https://gitee.com/ClimbSnailQ/Project_Image/raw/master/OtherProject/WreckerCar_mini.jpg)
 
-![image.jpg](./Image/WreckerCar_mini.jpg)
+![WreckerCar_mini.jpg](./Image/WreckerCar_mini.jpg)
 
 
 
 ![](https://gitee.com/ClimbSnailQ/Project_Image/raw/master/OtherProject/WreckerCar_mini2.jpg)
 
-![image.jpg](./Image/WreckerCar_mini2.jpg)
+![WreckerCar_mini2.jpg](./Image/WreckerCar_mini2.jpg)
 
 B站视频[链接](https://b23.tv/BV1qs411L7e6) https://b23.tv/BV1qs411L7e6
 
@@ -45,18 +45,18 @@ B站视频[链接](https://b23.tv/BV1qs411L7e6) https://b23.tv/BV1qs411L7e6
 * WreckerCarPCB_Project _（清障车的电路工程文件 AD17绘制）_
 * WreckerCar_Code _（清障车的51控制代码 MDK5工程）_
 * StructuralDraw _（清障车的solidwork2016结构工程）_
-* 实物图片
+* Image _（实物图片）_
 * 多功能消防清障车说明书.doc _（中日韩2017比赛时提交的作品说明书）_
 	
 #### PCB 3D预览图
 
 ![](https://gitee.com/ClimbSnailQ/Project_Image/raw/master/OtherProject/WreckerCar_PCB3D.png)
 
-![image.jpg](./Image/WreckerCar_PCB3D.png)
+![WreckerCar_PCB3D.png](./Image/WreckerCar_PCB3D.png)
 
 ![](https://gitee.com/ClimbSnailQ/Project_Image/raw/master/OtherProject/WreckerCar_PCD_TOP.png)
 
-![image.jpg](./Image/WreckerCar_PCD_TOP.png)
+![WreckerCar_PCD_TOP.png](./Image/WreckerCar_PCD_TOP.png)
 
 #### 电路存在的问题
 	1. 车轮使用的是四个555电机，TB6612不足以驱动（一片TB6612驱一个555时供电不到3s TB6612烧炸）
