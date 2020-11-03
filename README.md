@@ -1,6 +1,15 @@
 ## 机械臂清障车介绍
 本作品参加2017年12月中日韩创新工程竞赛，获金奖（大三上参加的）
+
+![](https://gitee.com/ClimbSnailQ/Project_Image/raw/master/OtherProject/WreckerCar_mini.jpg)
+
 ![image.jpg](./Image/WreckerCar_mini.jpg)
+
+
+
+![](https://gitee.com/ClimbSnailQ/Project_Image/raw/master/OtherProject/WreckerCar_mini2.jpg)
+
+![image.jpg](./Image/WreckerCar_mini2.jpg)
 
 B站视频[链接](https://b23.tv/BV1qs411L7e6) https://b23.tv/BV1qs411L7e6
 
@@ -41,9 +50,13 @@ B站视频[链接](https://b23.tv/BV1qs411L7e6) https://b23.tv/BV1qs411L7e6
 	
 #### PCB 3D预览图
 
-![image.jpg](./Image/picture1.png)
+![](https://gitee.com/ClimbSnailQ/Project_Image/raw/master/OtherProject/WreckerCar_PCB3D.png)
 
-![image.jpg](./Image/picture3.png)
+![image.jpg](./Image/WreckerCar_PCB3D.png)
+
+![](https://gitee.com/ClimbSnailQ/Project_Image/raw/master/OtherProject/WreckerCar_PCD_TOP.png)
+
+![image.jpg](./Image/WreckerCar_PCD_TOP.png)
 
 #### 电路存在的问题
 	1. 车轮使用的是四个555电机，TB6612不足以驱动（一片TB6612驱一个555时供电不到3s TB6612烧炸）
